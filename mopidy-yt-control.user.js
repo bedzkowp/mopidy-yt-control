@@ -7,6 +7,7 @@
 // @noframes
 // ==/UserScript==
 
+MOPIDY_RPC_URL = "https://banana/mopidy/rpc";
 
 GM_addStyle ( '                \
   .mopidyButton                \
@@ -27,7 +28,7 @@ function mopidyNextTrack()
 {
   var htr = new XMLHttpRequest();
   htr.onreadystatechange = onResponse;
-  htr.open("POST", "https://banana/mopidy/rpc", true);
+  htr.open("POST", MOPIDY_RPC_URL, true);
   htr.send('{"jsonrpc": "2.0", "id": 1, "method": "core.playback.next"}');
   
   function onResponse() {
@@ -53,7 +54,7 @@ function mopidyAddToQueue(ytVideoId, mopidyPosition = null, now = false)
   
   var htr = new XMLHttpRequest();
   htr.onreadystatechange = onResponse;
-  htr.open("POST", "https://banana/mopidy/rpc", true);
+  htr.open("POST", MOPIDY_RPC_URL, true);
   htr.send('{"jsonrpc": "2.0", "id": 1, "method": "core.tracklist.add", "params": [null,' + mopidyPosition + ',"' + ytLink + '"]}');
   
   function onResponse() {
@@ -76,7 +77,7 @@ function mopidyPlayAfterTlid(ytVideoId, tlid, now = false)
 {
   var htr = new XMLHttpRequest();
   htr.onreadystatechange = onResponse;
-  htr.open("POST", "https://banana/mopidy/rpc", true);
+  htr.open("POST", MOPIDY_RPC_URL, true);
   htr.send('{"jsonrpc": "2.0", "id": 1, "method": "core.tracklist.index", "params": [null,' + tlid + '] }');
   
   function onResponse() {
@@ -103,7 +104,7 @@ function mopidyPlayNext(ytVideoId, now = false)
 {
   var htr = new XMLHttpRequest();
   htr.onreadystatechange = onResponse;
-  htr.open("POST", "https://banana/mopidy/rpc", true);
+  htr.open("POST", MOPIDY_RPC_URL, true);
   htr.send('{"jsonrpc": "2.0", "id": 1, "method": "core.playback.get_current_tl_track"}');
   
   function onResponse() {
